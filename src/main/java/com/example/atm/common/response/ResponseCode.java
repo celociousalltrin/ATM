@@ -99,7 +99,7 @@ public enum ResponseCode {
     public static final String OK005_TEXT = "Amount has been withdraw Successfully";
     public static final String OK006_TEXT = "Transaction Created Successfully";
     public static final String OK007_TEXT = "Debt Created Successfully";
-    public static final String OK008_TEXT = "Debt Created Successfully";
+    public static final String OK008_TEXT = "Debt Updated Successfully";
 
     // ERROR Message
     public static final String ER999_TEXT = "Something went wrong.Please try again latter.";

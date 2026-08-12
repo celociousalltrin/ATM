@@ -35,14 +35,4 @@ public class AccountController {
     return ApiResponse.success(
         ResponseCode.SUCCESS, this.accountService.getAccountByUserId(userId));
   }
-
-  @PutMapping("/deposit")
-  public ApiResponse<AccountResponse> deposit(@Valid @RequestBody AccountOperationRequest payload) {
-    return ApiResponse.success(ResponseCode.AMOUNT_DEPOSITED, this.accountService.credit(payload));
-  }
-
-  @PutMapping("/withdraw")
-  public ApiResponse<AccountResponse> withdraw(@RequestBody AccountOperationRequest payload) {
-    return ApiResponse.success(ResponseCode.AMOUNT_WITHDRAW, this.accountService.debit(payload));
-  }
 }
