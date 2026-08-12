@@ -1,6 +1,5 @@
 package com.example.atm.account.controller;
 
-import com.example.atm.account.dto.AccountOperationRequest;
 import com.example.atm.account.dto.AccountRequest;
 import com.example.atm.account.dto.AccountResponse;
 import com.example.atm.account.service.AccountService;
