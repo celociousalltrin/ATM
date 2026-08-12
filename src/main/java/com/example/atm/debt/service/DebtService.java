@@ -39,7 +39,7 @@ public class DebtService {
     return this.debtMapper.toResponse(createdDebt);
   }
 
-  public DebtResponse updateDebtStatus(String id) {
+  public synchronized DebtResponse updateDebtStatus(String id) {
     Debt debt =
         this.debtRepository
             .findById(id)

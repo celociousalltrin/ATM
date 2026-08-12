@@ -30,7 +30,7 @@ public class TransactionService {
   private final DebtService debtService;
   private final TransactionMapper transactionMapper;
 
-  public TransactionResponse createTransaction(TransactionRequest payload) {
+  public synchronized TransactionResponse createTransaction(TransactionRequest payload) {
     Transaction transaction = this.transactionMapper.toEntity(payload);
     Account account =
         this.accountRepository
