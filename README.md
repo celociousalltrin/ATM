@@ -184,26 +184,72 @@ cd ATM
 
 ---
 
-## Run the application
+## Run the Application
 
-Linux/macOS:
+### macOS / Linux
+
+Make sure you have Git installed, then clone the repository and run:
 
 ```bash
-./mvnw spring-boot:run
+chmod +x start.sh
+./start.sh
 ```
 
-Windows:
+The `start.sh` script will automatically:
 
-```bash
+* Check for **Java 17**.
+* If Java 17 is missing, ask whether you want to install it.
+
+    * **macOS:** installs OpenJDK 17 using Homebrew.
+    * **Linux:** installs OpenJDK 17 using `apt`, `dnf`, or `yum`.
+* Check whether **port 8080** is already in use.
+* If port 8080 is occupied, ask whether you want to stop the process using it.
+* Build the application using the Maven wrapper.
+* Start the ATM application on:
+
+```text
+http://localhost:8080
+```
+
+### Prompts During Startup
+
+Depending on your system, the script may ask:
+
+```text
+Would you like to install OpenJDK 17? (y/n):
+```
+
+or:
+
+```text
+Would you like to stop the process using port 8080? (y/n):
+```
+
+Enter `y` to allow the script to perform the requested action, or `n` to stop the startup process.
+
+> **Note:** The script supports **macOS and Linux**. Windows users should use the Maven commands directly instead of
+`start.sh`.
+
+### Windows
+
+`start.sh` is not supported on Windows. Run the application using the Maven wrapper instead.
+
+Make sure **Java 17** is installed and configured in your `PATH`, then open Command Prompt or PowerShell in the project
+directory and run:
+
+```cmd
+mvnw.cmd clean package -DskipTests
 mvnw.cmd spring-boot:run
 ```
 
-Or:
+The application will start at:
 
-```bash
-mvn clean install
-mvn spring-boot:run
+```text
+http://localhost:8080
 ```
+
+> **Note:** Java **17** is required. Make sure port **8080** is available before starting the application.
+
 
 ---
 
@@ -876,9 +922,6 @@ The transaction service debits the source account and credits the target account
   "status": "SUCCESS"
 }
 ```
-
-> Note: the current `TransactionResponse` field is named `targetAccounId` (without the second `t` in `Account`). This
-> README intentionally reflects the current DTO rather than changing the API contract.
 
 ---
 
@@ -1735,18 +1778,6 @@ class AccountControllerTest {
 | POST   | `/debt`                  | Create debt                            |
 | GET    | `/debt?accountId={id}`   | Get payable debts                      |
 | PUT    | `/debt/update/{id}`      | Complete/update debt                   |
-
-### Legacy/current-branch account endpoints
-
-The GitHub `main` branch currently also exposes:
-
-| Method | Endpoint            | Purpose               |
-|--------|---------------------|-----------------------|
-| PUT    | `/account/deposit`  | Direct account credit |
-| PUT    | `/account/withdraw` | Direct account debit  |
-
-These are present in the repository's current `AccountController`, but if you've removed them in your latest local
-version, they should **not** be considered part of the final API contract.
 
 ---
 
